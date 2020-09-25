@@ -1,0 +1,15 @@
+---
+- name: install redis integration
+  package:
+    name: "nri-redis"
+    state: "present"
+
+- name: setup redis config
+  template:
+    src: redis-config.yml.j2
+    dest: /etc/newrelic-infra/integrations.d/redis-config.yml
+    mode: 0600
+  notify: restart newrelic-infra
+  when:
+    - nrinfragent_state != "absent"
+    - nrinfragent_os_name|lower != 'windows'

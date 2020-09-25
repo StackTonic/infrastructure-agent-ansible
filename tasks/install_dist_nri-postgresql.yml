@@ -1,0 +1,15 @@
+---
+- name: install postgresql integration
+  package:
+    name: "nri-postgresql"
+    state: "present"
+
+- name: setup postgresql config
+  template:
+    src: postgresql-config.yml.j2
+    dest: /etc/newrelic-infra/integrations.d/postgresql-config.yml
+    mode: 0600
+  notify: restart newrelic-infra
+  when:
+    - nrinfragent_state != "absent"
+    - nrinfragent_os_name|lower != 'windows'

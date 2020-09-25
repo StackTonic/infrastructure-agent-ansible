@@ -4,7 +4,124 @@ nrinfragent_service_enabled: "yes"
 nrinfragent_service_state: "started"
 nrinfragent_config:
   license_key: YOUR_LICENSE_KEY
-nrinfragent_integrations: []
 nrinfragent_tarball_url: "http://download.newrelic.com/infrastructure_agent/binaries/linux/{{ nrinfragent_architecture }}/newrelic-infra_linux_{{ nrinfragent_tarball_version }}_{{ nrinfragent_architecture }}.tar.gz"
 nrinfragent_tarball_download_dir: "/opt"
 nrinfragent_tarball_user: "root"
+
+nrinfragent_zookeeper: false
+nrinfragent_zookeeper_instances: []
+# - name: <INSTANCE IDENTIFIER>
+#   command: "metrics"
+#   arguments: {
+#     "host: localhost"
+#     "port: 2181"
+#     "cmd: nc"
+#   }
+#   labels: {
+#      "role: zookeeper"
+#   }
+nrinfragent_varnish: false
+nrinfragent_varnish_instances: []
+# - name: <INSTANCE IDENTIFIER>
+#   command: "all_data"
+#   arguments: {
+#     "params_config_file: <The location of the varnish.params configuration file. If omitted will look in /etc/default/varnish/varnish.params and /etc/sysconfig/varnish/varnish.params>"
+#     "instance_name: <User defined name to identify data from this instance in New Relic>"
+#   }
+#   labels: {
+#      "role: varnish"
+#      "env: production"
+#   }
+nrinfragent_redis: false
+nrinfragent_redis_instances: []
+# - name: redis-metrics
+#   command: "metrics"
+#   arguments: {
+#     "host: localhost"
+#     "port: 2181"
+#     "keys: '{"0":["<KEY_1>"],"1":["<KEY_2>"]}'"
+#     "remote_monitoring: true"
+#     "use_unix_socket: true"
+#   }
+#   labels: {
+#      "env: production"
+#   }
+# - name: redis-inventory
+#   command: "inventory"
+#   arguments: {
+#     "host: localhost"
+#     "port: 2181"
+#     "remote_monitoring: true"
+#     "use_unix_socket: true"
+#   }
+#   labels: {
+#      "env: production"
+#   }
+nrinfragent_postgresql: false
+# Database create access
+#CREATE USER new_relic WITH PASSWORD 'PASSWORD';
+#GRANT SELECT ON pg_stat_database TO new_relic;
+#GRANT SELECT ON pg_stat_database_conflicts TO new_relic;
+#GRANT SELECT ON pg_stat_bgwriter TO new_relic;
+nrinfragent_postgresql_instances: []
+# - name: sample_postgres
+#   command: "all_data"
+#   arguments: {
+#     "username: postgres"
+#     "password: pass"
+#     "hostname: psql-sample.localnet"
+#     "port: 6432"
+#     "collection_list: '{"postgres":{"public":{"pg_table1":["pg_index1","pg_index2"],"pg_table2":[]}}}'"
+#     "enable_ssl: true"
+#     "trust_server_certificate: false"
+#     "ssl_root_cert_location: /etc/newrelic-infra/root_cert.crt"
+#     "ssl_cert_location: /etc/newrelic-infra/postgresql.crt"
+#     "ssl_key_location: /etc/newrelic-infra/postgresql.key"
+#     "timeout:  10"
+#   }
+#   labels: {
+#      "env: production"
+#      "role: postgresql"
+#   }
+nrinfragent_nginx: false
+nrinfragent_nginx_instances: []
+# - name: nginx-server-metrics
+#   command: "metrics"
+#   arguments: {
+#     "status_url: http://127.0.0.1/status"
+#     "status_module: discover"
+#     "remote_monitoring: true"
+#     "validate_certs: true"
+#   }
+#   labels: {
+#      "role: load_balancer"
+#      "env: production"
+#   }
+# - name: nginx-server-inventory
+#   command: "inventory"
+#   arguments: {
+#     "status_url: http://127.0.0.1/status"
+#     "config_path: /etc/nginx/nginx.conf"
+#     "remote_monitoring: true"
+#   }
+#   labels: {
+#      "role: load_balancer"
+#      "env: production"
+#   }
+nrinfragent_mysql: false
+#sudo mysql -e "CREATE USER 'newrelic'@'localhost' IDENTIFIED BY 'YOUR_SELECTED_PASSWORD';"
+#mysql -e "GRANT REPLICATION CLIENT ON *.* TO 'newrelic'@'localhost' WITH MAX_USER_CONNECTIONS 5;"
+nrinfragent_mysql_instances: []
+# - name: mysql-server
+#   command: "status"
+#   arguments: {
+#     "hostname: localhost"
+#     "port: 3306"
+#     "remote_monitoring: true"
+#     "username: newrelic"
+#     "password: <YOUR_SELECTED_PASSWORD>"
+#   }
+#   labels: {
+#      "role: write-replica"
+#      "env: production"
+#   }

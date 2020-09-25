@@ -1,0 +1,19 @@
+---
+- name: install netcat
+  package:
+    name: "nc"
+    state: "present"
+- name: install zookeeper integration
+  package:
+    name: "nri-zookeeper"
+    state: "present"
+
+- name: setup zookeeper config
+  template:
+    src: zookeeper-config.yml.j2
+    dest: /etc/newrelic-infra/integrations.d/zookeeper-config.yml
+    mode: 0600
+  notify: restart newrelic-infra
+  when:
+    - nrinfragent_state != "absent"
+    - nrinfragent_os_name|lower != 'windows'

@@ -1,0 +1,15 @@
+---
+- name: install mysql integration
+  package:
+    name: "nri-mysql"
+    state: "present"
+
+- name: setup mysql config
+  template:
+    src: mysql-config.yml.j2
+    dest: /etc/newrelic-infra/integrations.d/mysql-config.yml
+    mode: 0600
+  notify: restart newrelic-infra
+  when:
+    - nrinfragent_state != "absent"
+    - nrinfragent_os_name|lower != 'windows'

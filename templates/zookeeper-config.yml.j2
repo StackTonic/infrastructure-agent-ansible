@@ -1,0 +1,18 @@
+#jinja2:lstrip_blocks: True
+## {{ ansible_managed }}
+integration_name: com.newrelic.zookeeper
+
+instances:
+{% for instance in nrinfragent_zookeeper_instances %}
+  - name: {{ instance.name }}
+    command: {{ instance.command }}
+    arguments:
+    {% for argument in instance.arguments %}
+      {{ argument }}
+    {% endfor %}
+    {% if instance.labels is defined %}
+    labels:
+    {% for label in instance.labels %}
+      {{ label }}
+    {% endfor %}
+{% endfor %}
